@@ -1,0 +1,14 @@
+/Volumes/Docs/Visual Studio Code/C#/Practice/bin/Debug/net8.0/Practice
+/Volumes/Docs/Visual Studio Code/C#/Practice/bin/Debug/net8.0/Practice.deps.json
+/Volumes/Docs/Visual Studio Code/C#/Practice/bin/Debug/net8.0/Practice.runtimeconfig.json
+/Volumes/Docs/Visual Studio Code/C#/Practice/bin/Debug/net8.0/Practice.dll
+/Volumes/Docs/Visual Studio Code/C#/Practice/bin/Debug/net8.0/Practice.pdb
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/Practice.GeneratedMSBuildEditorConfig.editorconfig
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/Practice.AssemblyInfoInputs.cache
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/Practice.AssemblyInfo.cs
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/Practice.csproj.CoreCompileInputs.cache
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/Practice.dll
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/refint/Practice.dll
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/Practice.pdb
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/Practice.genruntimeconfig.cache
+/Volumes/Docs/Visual Studio Code/C#/Practice/obj/Debug/net8.0/ref/Practice.dll
