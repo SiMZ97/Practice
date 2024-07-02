@@ -3,12 +3,32 @@
 Console.WriteLine("Creating an employee");
 Console.WriteLine("--------------------\n");
 
-Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), 25);
+Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), 25, EmployeeType.Manager);
 
-bethany.PerformWork(25);
+Employee george = new("George", "Jones", "george@snowball.be", new DateTime(1984, 3, 28), null, EmployeeType.Research);
 
-int minimumBonus = 100;
-int bonusTax = 0;
-int receivedBonus = bethany.CalculateBonusAndBonusTax(minimumBonus, ref bonusTax);
-Console.WriteLine($"The minimum bonus is {minimumBonus}, the bonus tax is {bonusTax} and {bethany.firstName} has received a bonus of {receivedBonus}");
+Employee mysteryEmployee = null;
+mysteryEmployee.DisplayEmployeeDetails();
+
+
+
+#region First run Bethany
+
+bethany.PerformWork();
+bethany.PerformWork(5);
+bethany.PerformWork();
+bethany.PerformWork();
+bethany.DisplayEmployeeDetails();
+
+#endregion
+
+#region First run George
+
+george.PerformWork(10);
+george.PerformWork();
+george.PerformWork();
+george.PerformWork();
+george.DisplayEmployeeDetails();
+
+#endregion
 

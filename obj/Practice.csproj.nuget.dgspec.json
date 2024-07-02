@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/Volumes/Docs/Visual Studio Code/C#/Practice/Practice.csproj": {}
+    "/Volumes/Docs/Github Rep/Practice/Practice.csproj": {}
   },
   "projects": {
-    "/Volumes/Docs/Visual Studio Code/C#/Practice/Practice.csproj": {
+    "/Volumes/Docs/Github Rep/Practice/Practice.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Volumes/Docs/Visual Studio Code/C#/Practice/Practice.csproj",
+        "projectUniqueName": "/Volumes/Docs/Github Rep/Practice/Practice.csproj",
         "projectName": "Practice",
-        "projectPath": "/Volumes/Docs/Visual Studio Code/C#/Practice/Practice.csproj",
+        "projectPath": "/Volumes/Docs/Github Rep/Practice/Practice.csproj",
         "packagesPath": "/Users/simz/.nuget/packages/",
-        "outputPath": "/Volumes/Docs/Visual Studio Code/C#/Practice/obj/",
+        "outputPath": "/Volumes/Docs/Github Rep/Practice/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/simz/.nuget/NuGet/NuGet.Config"

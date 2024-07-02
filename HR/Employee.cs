@@ -10,24 +10,29 @@ namespace Practice;
 
         public int numberOfHoursWorked;
         public double wage;
-        public double hourlyRate;
+        public double? hourlyRate;
 
         public DateTime birthDate;
 
         const int minimalHoursWorkedUnit = 1;
 
-        public Employee(string first, string last, string em, DateTime bd): this(first, last, em, bd, 0)
-        {
+        public EmployeeType employeeType;
 
+        public static double taxRate = 0.15;
+
+        public Employee(string first, string last, string em, DateTime bd): this(first, last, em, bd, 0, EmployeeType.StoreManager)
+        {
         }
 
-        public Employee(string first, string last, string em, DateTime bd, double rate)
+
+        public Employee(string first, string last, string em, DateTime bd, double? rate, EmployeeType empType)
         {
             firstName = first;
             lastName = last;
             email = em;
             birthDate = bd;
-            hourlyRate = rate;
+            hourlyRate = rate ?? 10;
+            employeeType = empType;
         }
 
         public void PerformWork()
@@ -67,22 +72,33 @@ namespace Practice;
 
         public double ReceiveWage(bool resetHours = true)
         {
-            wage = numberOfHoursWorked * hourlyRate;
-            Console.WriteLine($"{firstName} {lastName} has received ${wage}" + 
-                              $"for {numberOfHoursWorked} hours of work!");
+            double wageBeforeTax = 0.0;
 
-            if (resetHours)
+            if (employeeType == EmployeeType.Manager)
             {
-                numberOfHoursWorked = 0;
+                Console.WriteLine($"An extra was added to the wage since {firstName} is a manager");
+                wageBeforeTax = numberOfHoursWorked * hourlyRate.Value * 1.25;
             }
+            else
+            {
+                wageBeforeTax = numberOfHoursWorked * hourlyRate.Value;
+            }
+
+            double taxAmount = wageBeforeTax * taxRate;
+
+            wage = wageBeforeTax - taxAmount;
+
+            Console.WriteLine($"{firstName} {lastName} has received a wage of {wage} for {numberOfHoursWorked} hours of work");
+            
+            if (resetHours)
+                numberOfHoursWorked = 0;
             return wage;    
         }
 
         public void DisplayEmployeeDetails()
         {   
             Console.WriteLine($"\nFirst name: \t{firstName}\nLast name: \t{lastName}" +
-                              $"\nEmail: \t{email}\nBirth date: \t{birthDate}" +
-                              $"\nHourly rate: \t{hourlyRate}\nNumber of hours worked: \t{numberOfHoursWorked}" +
-                              $"\nWage: \t{wage}");
+                              $"\nEmail: \t{email}\nBirth date: \t{birthDate.ToShortDateString()}" +
+                              $"\nTax rate: \t{taxRate}");
         }
     }
