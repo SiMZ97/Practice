@@ -1,38 +1,108 @@
-﻿using System.Security.Cryptography.X509Certificates;
+﻿using System;
+using System.Text.Json;
 
-namespace Practice;
-
+namespace Practice.HR
+{
     internal class Employee
     {
-        public string firstName;
-        public string lastName;
-        public string email;
+        private string firstName;
+        private string lastName;
+        private string email;
 
-        public int numberOfHoursWorked;
-        public double wage;
-        public double? hourlyRate;
+        private int numberOfHoursWorked;
+        private double wage;
+        private double? hourlyRate;
 
-        public DateTime birthDate;
+        private DateTime birthDay;
+        private const int minimalHoursWorkedUnit = 1;
 
-        const int minimalHoursWorkedUnit = 1;
-
-        public EmployeeType employeeType;
+        private Address address;
 
         public static double taxRate = 0.15;
 
-        public Employee(string first, string last, string em, DateTime bd): this(first, last, em, bd, 0, EmployeeType.StoreManager)
+        public string FirstName
+        {
+            get { return firstName; }
+            set { firstName = value; }
+        }
+
+        public string LastName
+        {
+            get { return lastName; }
+            set { lastName = value; }
+        }
+
+        public string Email 
+        {
+            get { return email; }
+            set { email = value; }
+        }  
+
+        public int NumberOfHoursWorked
+        {
+            get { return numberOfHoursWorked; }
+            protected set { numberOfHoursWorked = value; }
+        }
+
+        public double Wage
+        {
+            get { return wage; }
+            private set { wage = value; }
+        }
+
+        public double? HourlyRate
+        {
+            get { return hourlyRate; }
+            set
+            {
+                if (value < 0)
+                {
+                    hourlyRate = 0;
+                }
+                else
+                {
+                    hourlyRate = value;
+                }
+            }
+        }
+
+        public DateTime BirthDay
+        {
+            get { return birthDay; }
+            set { birthDay = value; }
+        }
+
+        public Address Address
+        {
+            get { return address; }
+            set { address = value; }
+        } 
+
+        public Employee(string firstName, string lastName, string email,
+         DateTime birthday): this(firstName, lastName, email, birthday, null)
         {
         }
 
-
-        public Employee(string first, string last, string em, DateTime bd, double? rate, EmployeeType empType)
+        public Employee(string firstName, string lastName, string email,
+         DateTime birthday, double? hourlyRate)
         {
-            firstName = first;
-            lastName = last;
-            email = em;
-            birthDate = bd;
-            hourlyRate = rate ?? 10;
-            employeeType = empType;
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            BirthDay = birthday;
+            HourlyRate = hourlyRate ?? 10;
+        }
+
+        public Employee(string firstName, string lastName, string email,
+         DateTime birthday, double? hourlyRate, string street, string houseNumber, string zip, string city)
+        {
+            FirstName = firstName;
+            LastName = lastName;
+            Email = email;
+            BirthDay = birthday;
+            HourlyRate = hourlyRate ?? 10;
+
+            Address = new Address(street, houseNumber, zip, city);
         }
 
         public void PerformWork()
@@ -42,24 +112,27 @@ namespace Practice;
 
         public void PerformWork(int numberOfHours)
         {
-            numberOfHoursWorked += numberOfHours;
+            NumberOfHoursWorked += numberOfHours;
 
-            Console.WriteLine($"{firstName} {lastName} has worked for" +
-                              $"{numberOfHoursWorked} hour(s)!");
+            Console.WriteLine($"{FirstName} {LastName} has worked for" +
+                              $"{NumberOfHoursWorked} hour(s)!");
         }
 
         public int CalculateBonus(int bonus)
         {
-            if (numberOfHoursWorked > 10)
+            if (NumberOfHoursWorked > 10)
                 bonus *= 2;
+
             Console.WriteLine($"The employee got a bonus of {bonus}");
             return bonus;        
         }
 
-        public int CalculateBonusAndBonusTax(int bonus, ref int bonusTax)
+        public int CalculateBonusAndBonusTax(int bonus, out int bonusTax)
         {
-            if (numberOfHoursWorked > 10)
+            bonusTax = 0;
+            if (NumberOfHoursWorked > 10)
                 bonus *= 2;
+
             if (bonus >= 200)
             {
                 bonusTax = bonus / 10;
@@ -72,33 +145,53 @@ namespace Practice;
 
         public double ReceiveWage(bool resetHours = true)
         {
-            double wageBeforeTax = 0.0;
-
-            if (employeeType == EmployeeType.Manager)
-            {
-                Console.WriteLine($"An extra was added to the wage since {firstName} is a manager");
-                wageBeforeTax = numberOfHoursWorked * hourlyRate.Value * 1.25;
-            }
-            else
-            {
-                wageBeforeTax = numberOfHoursWorked * hourlyRate.Value;
-            }
-
+            double wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value;
             double taxAmount = wageBeforeTax * taxRate;
 
-            wage = wageBeforeTax - taxAmount;
+            Wage = wageBeforeTax - taxAmount;
 
-            Console.WriteLine($"{firstName} {lastName} has received a wage of {wage} for {numberOfHoursWorked} hours of work");
+            Console.WriteLine($"{FirstName} {LastName} has received a wage of {wage} for {numberOfHoursWorked} hours of work");
             
             if (resetHours)
-                numberOfHoursWorked = 0;
+                NumberOfHoursWorked = 0;
+
             return wage;    
+        }
+
+        public double CalculateWage()
+        {
+            WageCalculations wageCalculations = new WageCalculations();
+
+            double calculateValue = wageCalculations.ComplexWageCalculation(Wage, taxRate, 3, 42);
+
+            return calculateValue;
+        }
+
+        public string ConvertToJson()
+        {
+            string json = JsonSerializer.Serialize(this);
+
+            return json;
+        }
+
+        public static void DisplayTaxRate()
+        {
+            Console.WriteLine($"The current tax rate is {taxRate}");
         }
 
         public void DisplayEmployeeDetails()
         {   
-            Console.WriteLine($"\nFirst name: \t{firstName}\nLast name: \t{lastName}" +
-                              $"\nEmail: \t{email}\nBirth date: \t{birthDate.ToShortDateString()}" +
-                              $"\nTax rate: \t{taxRate}");
+            Console.WriteLine($"\nFirst name: \t{FirstName}\nLast name: \t{LastName}" +
+                              $"\nEmail: \t\t{Email}\nBirthday: \t{BirthDay.ToShortDateString()}");
+
         }
     }
+
+    internal class WageCalculations
+    {
+        public double ComplexWageCalculation(double wage, double taxRate, int factor1, int factor2)
+        {
+            return wage - (wage * taxRate);
+        }
+    }        
+}

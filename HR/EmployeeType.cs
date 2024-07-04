@@ -1,9 +1,10 @@
-﻿namespace Practice;
-
-public enum EmployeeType
+﻿namespace Practice
 {
-    Sales,
-    Manager,
-    Research,
-    StoreManager,
+    public enum EmployeeType
+    {
+        Sales,
+        Manager,
+        Research,
+        StoreManager,
+    }
 }

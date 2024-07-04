@@ -1,34 +1,32 @@
-﻿using Practice;
+﻿using Practice.HR;
 
-Console.WriteLine("Creating an employee");
-Console.WriteLine("--------------------\n");
+Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", 
+new DateTime(1979, 1, 16), 25);
 
-Employee bethany = new Employee("Bethany", "Smith", "bethany@snowball.be", new DateTime(1979, 1, 16), 25, EmployeeType.Manager);
+Manager mary = new Manager("Mary", "Jones", "mary@snowball.be",
+ new DateTime(1965, 1, 16), 30);
 
-Employee george = new("George", "Jones", "george@snowball.be", new DateTime(1984, 3, 28), null, EmployeeType.Research);
+JuniorResearcher bobJunior = new JuniorResearcher("Bob", "Spencer", "bob@snowball.be",
+ new DateTime(1988, 1, 23), 17);
 
-Employee mysteryEmployee = null;
-mysteryEmployee.DisplayEmployeeDetails();
+Employee jake = new Employee("Jake", "Nicols", "jake@snowball.be",
+ new DateTime(1995,8,16), 25, "New street", "123", "12345", "Pie Ville");
 
+string streetName = jake.Address.Street;
 
-
-#region First run Bethany
-
-bethany.PerformWork();
-bethany.PerformWork(5);
-bethany.PerformWork();
-bethany.PerformWork();
 bethany.DisplayEmployeeDetails();
+bethany.PerformWork(8);
+bethany.PerformWork();
+bethany.PerformWork(3);
+bethany.ReceiveWage();
 
-#endregion
 
-#region First run George
+mary.DisplayEmployeeDetails();
+mary.PerformWork(25);
+mary.PerformWork();
+mary.PerformWork();
+mary.ReceiveWage();
+mary.AttendManagementMeeting();
 
-george.PerformWork(10);
-george.PerformWork();
-george.PerformWork();
-george.PerformWork();
-george.DisplayEmployeeDetails();
-
-#endregion
-
+bobJunior.ResearchNewPieTastes(5);
+bobJunior.ResearchNewPieTastes(5);
