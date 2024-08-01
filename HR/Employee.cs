@@ -3,7 +3,7 @@ using System.Text.Json;
 
 namespace Practice.HR
 {
-    internal class Employee
+    internal class Employee : IEmployee
     {
         private string firstName;
         private string lastName;
@@ -143,6 +143,11 @@ namespace Practice.HR
             return bonus; 
         }
 
+        public virtual void GiveBonus()
+        {
+            Console.WriteLine($"{FirstName} {LastName} received a bonus of 100");
+        }
+
         public double ReceiveWage(bool resetHours = true)
         {
             double wageBeforeTax = NumberOfHoursWorked * HourlyRate.Value;
@@ -184,6 +189,11 @@ namespace Practice.HR
             Console.WriteLine($"\nFirst name: \t{FirstName}\nLast name: \t{LastName}" +
                               $"\nEmail: \t\t{Email}\nBirthday: \t{BirthDay.ToShortDateString()}");
 
+        }
+
+        public void GiveCompliment()
+        {
+            Console.WriteLine($"You are doing a great job, {FirstName}!");
         }
     }
 
