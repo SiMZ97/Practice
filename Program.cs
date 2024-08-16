@@ -30,23 +30,3 @@ foreach (Employee employee in employees)
     employee.GiveBonus();
     employee.GiveCompliment();
 }
-
-
-
-// bethany.DisplayEmployeeDetails();
-// bethany.PerformWork(8);
-// bethany.PerformWork();
-// bethany.PerformWork(3);
-// bethany.ReceiveWage();
-
-
-// mary.DisplayEmployeeDetails();
-// mary.PerformWork(25);
-// mary.PerformWork();
-// mary.PerformWork();
-// mary.ReceiveWage();
-
-// mary.GiveBonus();
-
-// bobJunior.ResearchNewPieTastes(5);
-// bobJunior.ResearchNewPieTastes(5);
